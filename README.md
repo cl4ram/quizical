@@ -1,8 +1,23 @@
-# React + Vite
+# Quizical - Scrimba
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a SOLO project suggested in Scrimba's Learn React Course
 
-Currently, two official plugins are available:
+## Screenshot
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![](./screenshot.png)
+
+## Links
+
+- Live Site URL: https://main--cl4ram-quizical.netlify.app/
+
+## My process
+
+- useState and useEffect
+- Conditional rendering
+
+## To-do
+
+- Let the user choose the category, difficulty and amount of questions to play
+- Add animation of missing selected answers when missing some
+- Use React Router to create different views 
+- Add correct/incorrect image beside each question when answers are checked
