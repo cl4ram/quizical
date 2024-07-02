@@ -96,7 +96,7 @@ export default function QuizScreen(){
         </div>
       </div>
       :
-      <div>Loading...</div>}
+      <span className="loader"></span>}
     </div>
   )
 }
