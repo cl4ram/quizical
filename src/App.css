@@ -5,11 +5,31 @@ body {
   justify-content: center;
   align-items: center;
   color: #293264;
+  position: relative;
+
+}
+
+.bubble {
+  position: absolute;
+  width: 200px;
+  z-index: 1;
+}
+
+.bubble.blue {
+  bottom: 0;
+  left: 0;
+}
+
+.bubble.yellow {
+  top: 0;
+  right: 0;
 }
 
 main {
+  position: relative;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 
 .start-screen,
