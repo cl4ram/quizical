@@ -3,8 +3,23 @@ import Question from "../components/Question"
 
 export default function QuizScreen(){
   const [questions, setQuestions] = useState([])
+  const [allChecked, setAllChecked] = useState(false)
+  const [correct, setCorrect] = useState(0)
+  const [start, setStart] = useState(0)
 
   const shuffleArray = (arr) => arr.sort(() => .5 - Math.random());
+  const questionElement = questions.map(question => {
+      return (
+        <Question 
+        key={question.id} 
+        id={question.id} 
+        q={question}
+        question={question.question} 
+        answers={question.answers} 
+        checked={allChecked}
+        handleClick={handleClickAnswer}/>
+      )
+    })
 
   useEffect(() => {
     async function getData() {
@@ -25,7 +40,7 @@ export default function QuizScreen(){
       setQuestions(array)
     }
     getData()
-  }, [])
+  }, [start])
 
   function handleClickAnswer(id, answer){
     setQuestions(prevQuestions => prevQuestions.map(question => {
@@ -38,25 +53,52 @@ export default function QuizScreen(){
     }))
   }
 
-  const questionElement = questions.length !== 0 
-  ? questions.map(question => {
-      return (
-        <Question 
-        key={question.id} 
-        id={question.id} 
-        q={question}
-        question={question.question} 
-        answers={question.answers} 
-        handleClickAnswer={handleClickAnswer}/>
-      )
-    })
-  : <div>Loading</div>
+  function handleSubmit(){
+    const allChecked = questions.every(question => question.selected !==null)
+    let correctAnswers = 0
+    if(questions.length > 0 && allChecked){
+      questions.map(question =>{
+        if(question.selected === question.correct){
+          return correctAnswers += 1
+        }
+      })
+    } else { return}
+    setAllChecked(allChecked)
+    setCorrect(correctAnswers)
+  
+  }
 
-  console.log(questions)
+  function playAgain(){
+    setStart(game => game + 1)
+    setAllChecked(false)
+    setQuestions([])
+    setCorrect(0)
+  }
 
   return (
     <div className="quiz-screen">
-      {questionElement}
+      {questions.length !== 0
+      ?
+      <div className="container">
+        {questionElement}
+        <div className="handlers-container">
+        {!allChecked
+        ? 
+        <button className="button check" onClick={handleSubmit}>Check answers</button> 
+        : 
+        <>
+        {allChecked && <p className="scores">You scored {correct}/5 correct answers </p>}
+        <button className="button again" onClick={playAgain}>Play again</button>
+        </>
+        }
+        
+
+        </div>
+      </div>
+      :
+      <div>Loading...</div>}
     </div>
-  );
+  )
 }
+
+
